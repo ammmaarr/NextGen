@@ -1,0 +1,53 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    width: 100%;  /* let our container decide our size */
+    height: 100%;
+    display: block;
+}
+
+.container {
+    position: relative;  /* makes this the origin of its children */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.buttons {
+    position: absolute;  /* let us position ourself inside the container */
+    left: 0;             /* make our position the top left of the container */
+    top: 0;
+    color: white;
+}
+
+.hello-world-btn {
+    /* z-index: 99; */
+    cursor: pointer;
+    padding: 1em;
+    background-color: white;
+    color: red;
+    position: absolute;  /* let us position them inside the container */
+    left: 0;             /* make their default position the top left of the container */
+    top: 0;
+}
+
+.hello-world-btn:hover {
+    background-color: #ddd;
+}
+
+/*# sourceMappingURL=main.css.map*/
