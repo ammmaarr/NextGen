@@ -50,4 +50,98 @@ body
     background-color: #ddd;
 }
 
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
+
+.modal-body {
+    padding: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 50%;
+    background-color: white;
+    border-radius: 10px;
+    overflow-y: scroll;
+    gap: 2em;
+}
+
+.modal-title {
+    font-weight: bold;
+    text-align: center;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.join-buttons {
+    display: flex;
+    gap: 2em;
+}
+
+.join-button {
+    border-radius: 10px;
+    padding: 1em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: .3s ease-in-out;
+}
+
+.join-button:hover {
+    border: 1px solid black;
+}
+
+.topics-container, .modules-container, .news-container {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topics, .modules, .news {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.topic, .module, .article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 2em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: .3s ease-in-out;
+    gap: 1em;
+    border: 1px solid black;
+}
+
+.topic-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.news {
+    flex-direction: column;
+}
+
+
 /*# sourceMappingURL=main.css.map*/
