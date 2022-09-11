@@ -121,7 +121,7 @@ const interactionManager = new InteractionManager(
 
 const loadingManager = new THREE.LoadingManager(() => {
     loading = false;
-
+    document.querySelector(".loading-container").classList.remove("visible-loading");
 }) 
 
 const zoomCamera = {
@@ -167,6 +167,17 @@ document.querySelector(".zoom-out-button").addEventListener("click", (event) => 
 let clickedElement = null;
 
 const GLTFloader = new GLTFLoader(loadingManager);
+
+// let mixer = null
+
+// GLTFloader.load('/models/Animation-Test.glb', (gltf) => {
+//     console.log(gltf)
+//     camera.lookAt(gltf.scene.position)
+//     mixer = new THREE.AnimationMixer(gltf.scene)
+//     const action = mixer.clipAction(gltf.animations[0])
+//     action.play()
+//     scene.add(gltf.scene)
+// });
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('/draco/');
@@ -323,7 +334,7 @@ const displayModal = (child) => {
         if (elements.length < 1) {
             return;
         }
-        
+
         elements.forEach((element) => {
             modalTitle.innerHTML = element.title
             modalSubTitle.innerHTML = element.subtitle
@@ -452,6 +463,10 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
+    // if(mixer)
+    // {
+    //     mixer.update(deltaTime)
+    // }
 
     // Update controls
     // controls.update()
@@ -620,14 +635,6 @@ const tick = () =>
                 }
                 zoomingOut = false;
             }
-    }
-
-    if (loading === true) {
-        // console.log(document.querySelector(".loading-container"));
-        setTimeout(() => {
-            document.querySelector(".loading-container").classList.remove("visible-loading");
-        }, 500);
-        loading = false;
     }
 
     // Render
