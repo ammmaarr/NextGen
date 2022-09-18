@@ -182,43 +182,35 @@ const GLTFloader = new GLTFLoader(loadingManager);
 // dracoLoader.setDecoderPath("/draco/");
 // GLTFloader.setDRACOLoader(dracoLoader);
 // GLTFloader.load("/models/texture_hover.glb", (gltf) => {
-//   const hovers = [];
 //   gltf.scene.children.forEach((child) => {
 //     if (child.name.includes("Hover")) {
-//       // console.log(child.material)
 //       const tmpMaterial = child.material.clone();
 //       tmpMaterial.transparent = true;
 //       tmpMaterial.opacity = 0;
 //       child.material = tmpMaterial;
-//       console.log(child.name);
-//       hovers.push(child);
-//     } else if (child.name.toLowerCase() !== "floor") {
 //       interactionManager.add(child);
 //       child.addEventListener("mouseover", (event) => {
 //         event.stopPropagation();
-//         hovers.forEach((item) => {
-//           item.material.transparent = true;
-//           var tweenon = new TWEEN.Tween(item.material).to(
-//             {
-//               opacity: 1,
-//             },
-//             500
-//           );
-//           tweenon.start();
-//         });
+//         child.material.transparent = true;
+//         var tweenon = new TWEEN.Tween(child.material).to(
+//           {
+//             opacity: 1,
+//           },
+//           500
+//         );
+//         tweenon.start();
 //       });
 //       child.addEventListener("mouseout", (event) => {
 //         event.stopPropagation();
-//         hovers.forEach((item) => {
-//           item.material.transparent = true;
-//           var tweenoff = new TWEEN.Tween(item.material).to(
-//             {
-//               opacity: 0,
-//             },
-//             500
-//           );
-//           tweenoff.start();
-//         });
+
+//         child.material.transparent = true;
+//         var tweenoff = new TWEEN.Tween(child.material).to(
+//           {
+//             opacity: 0,
+//           },
+//           500
+//         );
+//         tweenoff.start();
 //       });
 //     }
 //   });
@@ -902,7 +894,7 @@ const tick = () => {
   }
 
   // Render
-  // TWEEN.update();
+  TWEEN.update();
   renderer.render(scene, camera);
 
   // Call tick again on the next frame
