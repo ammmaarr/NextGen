@@ -245,18 +245,35 @@ const mouse = {
   mouseDownAtY: 0,
   mouseUpAtY: 0,
   moved: false,
+  down: false,
 };
 
 const onDocumentMouseDown = (event) => {
-  event.stopPropagation();
+  mouse.down = true;
   mouse.moved = false;
+  setTimeout(() => {
+    if (mouse.down) {
+      mouse.moved = true;
+    } else {
+      mouse.moved = false;
+    }
+  }, 100);
   mouse.mouseDownAtX = event.clientX;
   mouse.mouseDownAtY = event.clientY;
 };
 
 const onDocumentMouseUp = (event) => {
-  event.stopPropagation();
-  if (mouse.moved) {
+  if (event.target.className !== "webgl") {
+    cursor.x = 0;
+    cursor.y = 0;
+    mouse.down = false;
+    return;
+  }
+  mouse.down = false;
+};
+
+const onMouseMove = (event) => {
+  if (mouse.down) {
     mouse.mouseUpAtX = event.clientX;
     mouse.mouseUpAtY = event.clientY;
     const deltaX = mouse.mouseDownAtX - mouse.mouseUpAtX;
@@ -269,11 +286,6 @@ const onDocumentMouseUp = (event) => {
       cursor.y = 0;
     }, 1000);
   }
-};
-
-const onMouseMove = (event) => {
-  event.stopPropagation();
-  mouse.moved = true;
 };
 
 document.addEventListener("mousedown", onDocumentMouseDown, false);
@@ -621,11 +633,13 @@ const tick = () => {
         tmpCameraX = cameraSettings.xBound;
         cameraRotation.y = Math.PI / 6;
         cameraRotation.z = Math.PI / 12;
+        cameraRotation.x = 0;
         adjustedRotation = true;
       } else if (tmpCameraX < -cameraSettings.xBound) {
         tmpCameraX = -cameraSettings.xBound;
         cameraRotation.y = -Math.PI / 6;
         cameraRotation.z = -Math.PI / 12;
+        cameraRotation.x = 0;
         adjustedRotation = true;
       }
       camera.position.x = tmpCameraX;
