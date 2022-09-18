@@ -248,6 +248,80 @@ const mouse = {
   down: false,
 };
 
+const touch = {
+  touchDownAtX: 0,
+  touchDownAtY: 0,
+  touchUpAtX: 0,
+  touchUpAtY: 0,
+  moved: false,
+  down: false,
+};
+
+// const onDocumentMouseDown = (event) => {
+//   if (event.touches && event.touches.length > 0) {
+//     mouse.mouseDownAtX = event.touches[0].clientX;
+//     mouse.mouseDownAtY = event.touches[0].clientY;
+//     console.log("1", event.touches);
+//   } else {
+//     mouse.mouseDownAtX = event.clientX;
+//     mouse.mouseDownAtY = event.clientY;
+//   }
+//   mouse.down = true;
+//   mouse.moved = false;
+// };
+
+// const onDocumentMouseUp = (event) => {
+//   if (event.target.className !== "webgl") {
+//     cursor.x = 0;
+//     cursor.y = 0;
+//     mouse.down = false;
+//     return;
+//   }
+
+//   console.log(event.touches);
+//   mouse.down = false;
+//   if (mouse.moved) {
+//     if (event.changedTouches && event.changedTouches.length > 0) {
+//       mouse.mouseUpAtX = event.changedTouches[0].clientX;
+//       mouse.mouseUpAtY = event.changedTouches[0].clientY;
+//       console.log("2", event.touches);
+//     } else {
+//       console.log("no touch");
+//       mouse.mouseUpAtX = event.clientX;
+//       mouse.mouseUpAtY = event.clientY;
+//     }
+//     const deltaX = mouse.mouseDownAtX - mouse.mouseUpAtX;
+//     const deltaY = mouse.mouseDownAtY - mouse.mouseUpAtY;
+//     const divisionFactor = 200;
+//     cursor.x = deltaX / divisionFactor;
+//     cursor.y = deltaY / divisionFactor;
+//     setTimeout(() => {
+//       cursor.x = 0;
+//       cursor.y = 0;
+//     }, 1000);
+//   }
+// };
+
+// const onMouseMove = (event) => {
+//   if (mouse.down) {
+//     mouse.moved = true;
+//   }
+// };
+
+const onDocumentTouchDown = (event) => {
+  touch.down = true;
+  touch.moved = false;
+  setTimeout(() => {
+    if (touch.down) {
+      touch.moved = true;
+    } else {
+      touch.moved = false;
+    }
+  }, 100);
+  touch.touchDownAtX = event.touches[0].clientX;
+  touch.touchDownAtY = event.touches[0].clientY;
+};
+
 const onDocumentMouseDown = (event) => {
   mouse.down = true;
   mouse.moved = false;
@@ -262,6 +336,10 @@ const onDocumentMouseDown = (event) => {
   mouse.mouseDownAtY = event.clientY;
 };
 
+const onDocumentTouchUp = (event) => {
+  touch.down = false;
+};
+
 const onDocumentMouseUp = (event) => {
   if (event.target.className !== "webgl") {
     cursor.x = 0;
@@ -270,6 +348,23 @@ const onDocumentMouseUp = (event) => {
     return;
   }
   mouse.down = false;
+};
+
+const onTouchMove = (event) => {
+  if (touch.down) {
+    touch.touchUpAtX = event.changedTouches[0].clientX;
+    touch.touchUpAtY = event.changedTouches[0].clientY;
+    const deltaX = touch.touchDownAtX - touch.touchUpAtX;
+    const deltaY = touch.touchDownAtY - touch.touchUpAtY;
+    const divisionFactor = 200;
+    cursor.x = deltaX / divisionFactor;
+    cursor.y = deltaY / divisionFactor;
+
+    setTimeout(() => {
+      cursor.x = 0;
+      cursor.y = 0;
+    }, 1000);
+  }
 };
 
 const onMouseMove = (event) => {
@@ -291,6 +386,10 @@ const onMouseMove = (event) => {
 document.addEventListener("mousedown", onDocumentMouseDown, false);
 document.addEventListener("mouseup", onDocumentMouseUp, false);
 document.addEventListener("mousemove", onMouseMove, false);
+
+document.addEventListener("touchstart", onDocumentTouchDown, false);
+document.addEventListener("touchend", onDocumentTouchUp, false);
+document.addEventListener("touchmove", onTouchMove, false);
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("/draco/");
