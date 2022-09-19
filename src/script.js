@@ -442,11 +442,11 @@ GLTFloader.load(
 
 const sanityClient = require("@sanity/client");
 const client = sanityClient({
-  projectId: "me2o9y1g",
+  projectId: "wof7xyb3",
   dataset: "production",
-  apiVersion: "2022-08-25", // use current UTC date - see "specifying API version"!
+  apiVersion: "2022-09-20", // use current UTC date - see "specifying API version"!
   token:
-    "sk8UH7T2Vl22iPd7YdFRealuVigaFYlYIpZFELPOO6kHb5BbzuuptPnUWAJRnWBfGTWFzmVemfvKJWW88nXTx8l3AJtgGWDzCEC7XH5SGMkIN7jELDjHZ0YSWSH5NIVGlbiUSboZWni07H3R6ZNkQ2E5c82hH7J5AAaBtMwLw5CZSSWKsdSB",
+    "skpeQsvrH2EShnhuN8xhlFIf08ZGPrFgrg3xDl2hNIOWFt31CFGpg8zAqXSHM8PanjerwP1EGsFWdK99stCQHnP3dn5yBlajRztKQMDKrGJ3IX5TkOZfGrF7bG06yRsLk30p39rm5tuhBusGDbSL2Kyj3FgudQHhAX1yDGsyMrSk65jASvp3",
   useCdn: false, // `false` if you want to ensure fresh data
 });
 
@@ -547,15 +547,21 @@ const displayModal = (child) => {
       modalTitle.innerHTML = element.title;
       modalSubTitle.innerHTML = element.subtitle;
       modalBody.innerHTML = element.body;
-      element.topics.forEach((topic) => {
-        createTopic(topic, topicsContainer);
-      });
-      element.modules.forEach((module) => {
-        createModule(module, modulesContainer);
-      });
-      element.articles.forEach((article) => {
-        createArticle(article, articlesContainer);
-      });
+      if (element.topics && element.topics.length > 0) {
+        element.topics.forEach((topic) => {
+          createTopic(topic, topicsContainer);
+        });
+      }
+      if (element.modules && element.modules.length > 0) {
+        element.modules.forEach((module) => {
+          createModule(module, modulesContainer);
+        });
+      }
+      if (element.articles && element.articles.length > 0) {
+        element.articles.forEach((article) => {
+          createArticle(article, articlesContainer);
+        });
+      }
     });
     modal.classList.add("visible");
   });
