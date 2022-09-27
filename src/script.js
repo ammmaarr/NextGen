@@ -375,9 +375,9 @@ const onMouseMove = (event) => {
   }
 };
 
-document.addEventListener("mousedown", onDocumentMouseDown, false);
-document.addEventListener("mouseup", onDocumentMouseUp, false);
-document.addEventListener("mousemove", onMouseMove, false);
+// document.addEventListener("mousedown", onDocumentMouseDown, false);
+// document.addEventListener("mouseup", onDocumentMouseUp, false);
+// document.addEventListener("mousemove", onMouseMove, false);
 
 document.addEventListener("touchstart", onDocumentTouchDown, false);
 document.addEventListener("touchend", onDocumentTouchUp, false);
@@ -599,7 +599,7 @@ modal.addEventListener("click", (event) => {
 const clock = new THREE.Clock();
 let previousTime = 0;
 
-// document.addEventListener("mousemove", onDocumentMouseMove, false);
+document.addEventListener("mousemove", onDocumentMouseMove, false);
 
 const cameraRotation = {
   x: 0,
